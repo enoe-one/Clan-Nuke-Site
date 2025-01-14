@@ -81,6 +81,31 @@
             background: #555;
             margin: 40px 0;
         }
+.btn-multicolor {
+    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 300%;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    animation: gradientShift 3s infinite;
+    text-align: center;
+}
+
+.btn-multicolor:hover {
+    background-size: 400%;
+    animation: gradientShift 1.5s infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
     </style>
 </head>
 <body>
@@ -137,8 +162,13 @@
         <!-- Nouveau formulaire avec bouton de téléchargement -->
         <h2>et voila mon premier formulaire🙄</h2>
         <p>(pas fou fou je trouve) mais bon... faut tous faire sois même XD</p>
+
+
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdLddbV4ECE7lo0JpQ51GxvscL0wVE24h8mfAxPfwuZKyGS9Q/viewform?usp=sf_link" class="btn">Télécharger</a>
-        
+                <h2>ici j'ai tentée de faire un mini jeu qui ... étais un peut froduleux </h2>
+        <p>en vrai j'etait TROP content du resulat et j'ais trouver qu'il étais vraiment pas mal (le lien vers le mini jeu vous ramene sur un des pages principal car j'avais la flemme de refaire le code en entier)</p>
+        <a href="https://clan-nuke.netlify.app/mini%20game.html" class="btn btn-multicolor">Lancer</a>
+
     </div>
 
 </body>
