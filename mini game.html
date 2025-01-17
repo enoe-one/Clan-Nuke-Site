@@ -211,15 +211,15 @@
 
         function useSpecial() {
             if (canUseSpecial) {
-                // Agrandir la superforteresse pour couvrir toute la largeur du canvas et l'allonger
+                
                 superfortresses = [
-                    { x: 0, y: canvas.height, width: canvas.width, height: 300, speed: 5 }  // Superforteresse plus grande
+                    { x: 0, y: canvas.height, width: canvas.width, height: 300, speed: 5 }  
                 ];
 
                 canUseSpecial = false;
                 cooldownTime = 30;
 
-                // Cooldown
+                
                 const cooldownInterval = setInterval(() => {
                     cooldownTime--;
                     if (cooldownTime <= 0) {
@@ -228,7 +228,7 @@
                     }
                 }, 1000);
 
-                // Animation des superforteresses
+                
                 const interval = setInterval(() => {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     movePlayer();
@@ -242,7 +242,6 @@
                         fortress.y -= fortress.speed;
                         ctx.drawImage(superfortressImg, fortress.x, fortress.y, fortress.width, fortress.height);
 
-                        // Destruction des ennemis
                         enemies = enemies.filter((enemy) => {
                             if (
                                 fortress.x < enemy.x + enemy.width &&
@@ -257,7 +256,7 @@
                         });
                     });
 
-                    // Fin de l'animation
+                 
                     if (superfortresses[0].y + superfortresses[0].height < 0) {
                         clearInterval(interval);
                     }
@@ -311,7 +310,7 @@
             drawBullets();
             drawEnemies();
             drawExplosions();
-            drawSuperfortresses();  // Appel de la fonction de dessin des superfortresses
+            drawSuperfortresses();  
             drawHUD();
             detectCollisions();
             requestAnimationFrame(gameLoop);
