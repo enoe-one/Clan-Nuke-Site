@@ -211,13 +211,13 @@
 
         function useSpecial() {
             if (canUseSpecial) {
-               
+                
                 superfortresses = [
                     { x: 0, y: canvas.height, width: canvas.width, height: 300, speed: 5 }  
                 ];
 
                 canUseSpecial = false;
-                cooldownTime = 60;
+                cooldownTime = 30;
 
                 
                 const cooldownInterval = setInterval(() => {
@@ -242,7 +242,6 @@
                         fortress.y -= fortress.speed;
                         ctx.drawImage(superfortressImg, fortress.x, fortress.y, fortress.width, fortress.height);
 
-                        
                         enemies = enemies.filter((enemy) => {
                             if (
                                 fortress.x < enemy.x + enemy.width &&
@@ -257,7 +256,7 @@
                         });
                     });
 
-                    
+                 
                     if (superfortresses[0].y + superfortresses[0].height < 0) {
                         clearInterval(interval);
                     }
@@ -273,7 +272,7 @@
 
         function drawHUD() {
             ctx.fillStyle = "white";
-            ctx.font = "20px Stencil";
+            ctx.font = "20px Arial";
             ctx.fillText(`Score: ${score}`, 10, 30);
             ctx.fillText(`☢️ Spécial☢️: ${cooldownTime > 0 ? cooldownTime + "s" : "Prêt"}`, 10, 60);
             ctx.fillText(`❤ ${lives}`, canvas.width - 80, 30);
