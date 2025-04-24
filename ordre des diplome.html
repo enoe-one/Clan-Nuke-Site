@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diplômes & Grades - Clan Nuke</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            background: url('80894906-2eef-4f4f-ac0f-5a84831cff38.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        header {
+            background: url('bombeeeee.webp') no-repeat center center/cover;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+            header h1 {
+                font-size: 3em;
+                margin: 0;
+                text-shadow: 2px 2px 5px black;
+            }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+        }
+
+            nav a {
+                color: white;
+                text-decoration: none;
+                margin: 0 15px;
+                font-size: 1.2em;
+            }
+
+                nav a:hover {
+                    text-decoration: underline;
+                }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            margin: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-top: 30px;
+        }
+
+        ul {
+            text-align: left;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 0;
+            list-style: none;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px auto;
+            background: #e63946;
+            color: white;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+            .btn:hover {
+                background: #d62839;
+            }
+
+        .category {
+            margin-top: 40px;
+            font-size: 1.5em;
+            text-decoration: underline;
+        }
+
+        .stage {
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .desc {
+            display: none;
+            padding-left: 20px;
+            color: #ccc;
+        }
+
+        .toggle {
+            cursor: pointer;
+            color: #00ffff;
+            margin-left: 10px;
+        }
+    </style>
+    <script>
+        function toggleDesc(id) {
+            const desc = document.getElementById(id);
+            desc.style.display = desc.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Diplômes et Grades - Clan Nuke</h1>
+    </header>
+    <nav>
+        <a href="index.html">Page principale</a>
+        <a href="archive.html">Archives des joueurs</a>
+        <a href="mini game.html">Mini-jeu</a>
+        <a href="ordre des diplome.html">diplômes</a>
+    </nav>
+    <div class="container">
+        <h2>indication aux membres</h2>
+        <p>
+            Cher soldat, sergent, commandant, général.<br>
+            Cette page est dédiée aux membres du Clan Nuke qui souhaitent monter en grade au sein de notre armée.<br>
+            Pour cela, vous aurez besoin de diplômes. Ils sont tous exposés en dessous.<br>
+            Attention, selon le stade du diplôme, la difficulté change : plus le stade est élevé, plus le diplôme est dur.<br>
+            Nous vous attendons sur le jeu. À bientôt.<br>
+            L'état-major.
+        </p>
+
+        <div class="category">🛩️Aéronautique</div>
+        <ul>
+            <li>
+                <span class="stage">(1)</span> P.A.M.A : Pilote Aviation Mobile et Armée <span class="toggle" onclick="toggleDesc('desc1')">▶</span>
+                <div id="desc1" class="desc">Formation de base pour les pilotes militaires opérant dans des conditions variées, notamment sur hélicoptères de combat et avions légers. Ils assurent reconnaissance, transport rapide et appui aérien.</div>
+            </li>
+            <li>
+                <span class="stage">(2)</span> F.A.P.T : Force Aéronautique Protection Terrestre <span class="toggle" onclick="toggleDesc('desc2')">▶</span>
+                <div id="desc2" class="desc">Unité spécialisée dans l'appui aérien rapproché, visant à protéger les troupes au sol lors d'opérations militaires grâce à des frappes précises et coordonnées.</div>
+            </li>
+            <li>
+                <span class="stage">(2)</span>U.P.S.R : Unité de Patrouille Stratégique ou Rapide <span class="toggle" onclick="toggleDesc('desc3')">▶</span>
+                <div id="desc3" class="desc">Division chargée de surveiller de vastes zones aériennes. Ces pilotes effectuent des patrouilles à haute altitude ou à grande vitesse pour prévenir toute intrusion.</div>
+            </li>
+            <li>
+                <span class="stage">(2-3))</span>F.T.M.A : Force de Transport de Matériel et Armée <span class="toggle" onclick="toggleDesc('desc4')">▶</span>
+                <div id="desc4" class="desc">unité du transport aérien de troupes, de blindés légers, de matériel stratégique. Opèrent souvent sous haute tension, dans des zones à risque.</div>
+            </li>
+            <li>
+                <span class="stage">(3)</span> U.E.I – Unité d'Espionnage Intelligente <span class="toggle" onclick="toggleDesc('desc5')">▶</span>
+                <div id="desc5" class="desc">unité des drones et avions furtifs pour collecter des renseignements en territoire ennemi. Cette unité est spécialisée dans l’observation discrète et le brouillage électronique.</div>
+            </li>
+            <li>
+                <span class="stage">(3)</span> F.B.S : Force de Bombardement Stratégique <span class="toggle" onclick="toggleDesc('desc6')">▶</span>
+                <div id="desc6" class="desc">Division aérienne lourde, équipée d’avions bombardiers. Elle intervient sur les cibles stratégiques : bases ennemies, infrastructures, armements lourds.</div>
+            </li>
+            <li>
+                <span class="stage">(3-4)</span> F.E.I.R : Force d'Élite d'Intervention Rapide <span class="toggle" onclick="toggleDesc('desc7')">▶</span>
+                <div id="desc7" class="desc">Assure la sécurité aérienne de hauts gradés ou d’émissaires diplomatiques. Opère des vols de protection ou d’extraction en cas de menace élevée.</div>
+            </li>
+            <li>
+                <span class="stage">(4)</span> F.A.P.T : Force Aéronautique Protection Terrestre <span class="toggle" onclick="toggleDesc('desc8')">▶</span>
+                <div id="desc8" class="desc">Unité d'élite capable d'intervenir en quelques minutes avec précision. Spécialisée dans les assauts aéroportés sur cibles critiques et missions de sauvetage sous feu ennemi.</div>
+            </li>
+        </ul>
+
+        <div class="category">🧥Terrestre</div>
+        <ul>
+            <li>
+                <span class="stage">(1)</span> U.I.T : Unité Intervention Terrestre <span class="toggle" onclick="toggleDesc('desc9')">▶</span>
+                <div id="desc9" class="desc">Forces de première ligne mobilisées pour sécuriser des zones hostiles, défendre des positions, ou appuyer des opérations spéciales au sol.</div>
+            </li>
+            <li>
+                <span class="stage">(2)</span> F.I.R : Force d'Intervention Rapide <span class="toggle" onclick="toggleDesc('desc10')">▶</span>
+                <div id="desc10" class="desc">Déployée pour répondre aux menaces urgentes. Cette unité légère, mobile et entraînée, agit sans délai pour contrôler ou neutraliser l’adversaire.</div>
+            </li>
+            <li>
+                <span class="stage">(2)</span>U.P.A.A : Unité de Protection Anti-Aérienne<span class="toggle" onclick="toggleDesc('desc11')">▶</span>
+                <div id="desc11" class="desc">Responsable de la neutralisation des menaces aériennes grâce à des batteries anti-aériennes et des missiles sol-air. Protège les bases et les convois.</div>
+            </li>
+            <li>
+                <span class="stage">(2-3)</span>U.P.S : Unité de Parachutistes Stratégiques <span class="toggle" onclick="toggleDesc('desc12')">▶</span>
+                <div id="desc12" class="desc">Effectue des opérations par largage en profondeur sur le territoire ennemi. Formation intensive aux environnements hostiles et aux tactiques de guérilla</div>
+            </li>
+            <li>
+                <span class="stage">(2)</span>U.T.M : Unité Terrestre Motorisée <span class="toggle" onclick="toggleDesc('desc13')">▶</span>
+                <div id="desc13" class="desc">unité mobile armé, déployé rapidement sur de vastes territoires grâce à des véhicules blindés légers. unitée de patrouille rapide.</div>
+            </li>
+            <li>
+                <span class="stage">(3)</span>F.I.B : Force d'Intervention Blindée <span class="toggle" onclick="toggleDesc('desc14')">▶</span>
+                <div id="desc14" class="desc">Opère avec des chars et véhicules blindés lourds pour les assauts terrestres. Spécialistes de la percée de lignes ennemies ,au combat urbain et au assaut de bases.</div>
+            </li>
+            <li>
+                <span class="stage">(3)</span>U.B.T : Unité de Bombardement Terrestre<span class="toggle" onclick="toggleDesc('desc15')">▶</span>
+                <div id="desc15" class="desc">unité d’artillerie lourde et des véhicule de lance-missiles pour détruire à distance des fortifications ennemies ou couvrir des zones stratégiques.</div>
+            </li>
+            <li>
+                <span class="stage">(4)</span> F.E.A.T : Force d'Élite Anti-Terrestre <span class="toggle" onclick="toggleDesc('desc16')">▶</span>
+                <div id="desc16" class="desc">Regroupe les meilleurs éléments des unités terrestres, formés à la destruction rapide et précise de groupe d'ennemie ou de veicule blindés lourd ou lèger.</div>
+            </li>
+        </ul>
+
+        <div class="category">🚁Aéronaval et Naval</div>
+        <ul>
+            <li>
+                <span class="stage">(1)</span> U.I.A : Unité d'Intervention Aéronaval <span class="toggle" onclick="toggleDesc('desc17')">▶</span>
+                <div id="desc17" class="desc">unité d’intervention d’hélicoptère armée qui peut intervenir dans toute la map.</div>
+            </li>
+            <li>
+                <span class="stage">(2)</span>U.M : Unité de Marins<span class="toggle" onclick="toggleDesc('desc18')">▶</span>
+                <div id="desc18" class="desc">Forces navales formées pour la navigation, la défense de navires et la sécurisation des ports. ils sont entrainés contre la piraterie.</div>
+            </li>
+            <li>
+                <span class="stage">(2)</span> U.I.N : Unité d'Intervention Navale <span class="toggle" onclick="toggleDesc('desc19')">▶</span>
+                <div id="desc19" class="desc">Intervient lors qu’il faut aidée un navire attaquer, ils sont Entraînée aux manœuvres tactiques navales rapprochées. Ils peuvent intervenir en quelque minute.</div>
+            </li>
+            <li>
+                <span class="stage">(2)</span>F.T.T.A : Force de Transport de Troupe Aéronavale<span class="toggle" onclick="toggleDesc('desc20')">▶</span>
+                <div id="desc20" class="desc">Transport de soldats via hélicoptères pour les débarquements maritimes. Opère souvent dans des conditions météo extrêmes et dans des zones très critique.</div>
+            </li>
+            <li>
+                <span class="stage">(3)</span>U.B.N : Unité de Bombardement Naval <span class="toggle" onclick="toggleDesc('desc21')">▶</span>
+                <div id="desc21" class="desc">Manie des batteries lourdes embarquées pour bombarder des cibles côtières. Coordination essentielle avec les forces aériennes et terrestres.</div>
+            </li>
+            <li>
+                <span class="stage">(3))</span>U.S.A : Unité de Soutien Aérien <span class="toggle" onclick="toggleDesc('desc22')">▶</span>
+                <div id="desc22" class="desc">Fournit un appui armé aux unités navale ,terrestre ou aérienne à l’aide de drones, ravitaillements aériens ou relèves par hélico en pleine mer.</div>
+            </li>
+            <li>
+                <span class="stage">(4)</span>F.D.U.A : Force de Destruction d’Unités Aéronavales <span class="toggle" onclick="toggleDesc('desc23')">▶</span>
+                <div id="desc23" class="desc">Équipe d’élite responsable de la traque et de la neutralisation de navires et avions ennemis. Intervient lors de conflits maritimes intenses.</div>
+            </li>
+        </ul>
+
+        <div class="category">⚔️Forces d'élite</div>
+        <ul>
+            <li>
+                <span class="stage">(4)</span>F.E.I.A.T : Force d'Élite d'Intervention Anti-Terrestre <span class="toggle" onclick="toggleDesc('desc24')">▶</span>
+                <div id="desc24" class="desc">Composée d’opérateurs spéciaux entraînés pour détruire les forces terrestres ennemies avec une grande efficacité, qu’elle soit blindée ou non.</div>
+            </li>
+            <li>
+                <span class="stage">(4)</span>F.E.I.A.N : Force d'Élite d'Intervention Anti-Navale <span class="toggle" onclick="toggleDesc('desc25')">▶</span>
+                <div id="desc25" class="desc">Neutralise les installations maritimes ou les bâtiments de guerre ennemis par des missions commandos amphibies. Il peuvent détruire ou prendre contrôle d’un navire en quelle que minute</div>
+            </li>
+            <li>
+                <span class="stage">(4)</span>F.E.I.A.A : Force d'Élite d'Intervention Anti-Aérienne <span class="toggle" onclick="toggleDesc('desc26')">▶</span>
+                <div id="desc26" class="desc">force spécial entrainer pour intervenir sur tout terrain et détruire toutes les unités aériennes ennemie. Ils peuvent aussi bien opérer furtivement que rapidement </div>
+            </li>
+            <li>
+                <span class="stage">(5)</span>U.P.E.M : Unité de Protection de l’État-Major <span class="toggle" onclick="toggleDesc('desc27')">▶</span>
+                <div id="desc27" class="desc">Défend les officiers supérieurs et les centres de commandement. Entraînée à la neutralisation rapide de toute menace infiltrée.</div>
+            </li>
+            <li>
+                <span class="stage">(5)</span>F.S.C.N : Force Spéciale du Clan Nuke <span class="toggle" onclick="toggleDesc('desc28')">▶</span>
+                <div id="desc28" class="desc">Unité la plus secrète et puissante. Elle est utilisée pour des missions à très haut risque et très haute importance, souvent en dernier recours stratégique.</div>
+            </li>
+        </ul>
+
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdB0q_wgDPIEPD56Jn_CGXT3TudGjKRjVd06sPXn8xP9JQqTQ/viewform?usp=header" class="btn">demande de diplome</a>
+    </div>
+</body>
+</html>
