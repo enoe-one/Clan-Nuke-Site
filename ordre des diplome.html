@@ -21,7 +21,7 @@
         }
 
             header h1 {
-                font-size: 3em;
+                font-size: 3.5em;
                 margin: 0;
                 text-shadow: 2px 2px 5px black;
             }
@@ -36,25 +36,36 @@
             nav a {
                 color: white;
                 text-decoration: none;
-                margin: 0 15px;
-                font-size: 1.2em;
+                margin: 0 20px;
+                font-size: 1.3em;
+                transition: all 0.3s ease;
             }
 
                 nav a:hover {
                     text-decoration: underline;
+                    color: #e63946;
                 }
 
         .container {
-            padding: 20px;
+            padding: 40px 20px;
             text-align: center;
             background: rgba(0, 0, 0, 0.8);
             margin: 20px;
             border-radius: 10px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         h2 {
-            font-size: 2em;
+            font-size: 2.5em;
             margin-top: 30px;
+            color: #e63946;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
         }
 
         ul {
@@ -66,19 +77,22 @@
         }
 
         li {
-            margin: 8px 0;
+            margin: 15px 0;
+            font-size: 1.1em;
         }
 
         .btn {
             display: inline-block;
-            padding: 10px 20px;
-            margin: 20px auto;
+            padding: 12px 25px;
+            margin: 30px auto;
             background: #e63946;
             color: white;
             text-transform: uppercase;
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
         }
 
             .btn:hover {
@@ -87,8 +101,9 @@
 
         .category {
             margin-top: 40px;
-            font-size: 1.5em;
+            font-size: 1.8em;
             text-decoration: underline;
+            color: #ffd700;
         }
 
         .stage {
@@ -100,13 +115,20 @@
             display: none;
             padding-left: 20px;
             color: #ccc;
+            font-size: 1em;
         }
 
         .toggle {
             cursor: pointer;
             color: #00ffff;
             margin-left: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
         }
+
+            .toggle:hover {
+                text-decoration: underline;
+            }
     </style>
     <script>
         function toggleDesc(id) {
@@ -121,9 +143,9 @@
     </header>
     <nav>
         <a href="index.html">Page principale</a>
-        <a href="monter.html">monter en grade</a>
         <a href="archive.html">Archives des joueurs</a>
         <a href="mini game.html">Mini-jeu</a>
+        <a href="ordre des diplome.html">diplômes</a>
     </nav>
     <div class="container">
         <h2>indication aux membres</h2>
