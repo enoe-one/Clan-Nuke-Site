@@ -93,232 +93,242 @@
     </div>
 
     <script>
-        const canvas = document.getElementById("gameCanvas");
-        const ctx = canvas.getContext("2d");
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
 
-        const playerImg = new Image();
-        playerImg.src = "imagesde_l_avion-removebg-preview.png";
+    const playerImg = new Image();
+    playerImg.src = "imagesde_l_avion-removebg-preview.png";
 
-        const enemyImg = new Image();
-        enemyImg.src = "images-removebg-preview.png";
+    const enemyImg = new Image();
+    enemyImg.src = "images-removebg-preview.png";
 
-        const explosionImg = new Image();
-        explosionImg.src = "explosion.png";
+    const explosionImg = new Image();
+    explosionImg.src = "explosion.png";
 
-        const superfortressImg = new Image();
-        superfortressImg.src = "superfortress.png";
+    const superfortressImg = new Image();
+    superfortressImg.src = "superfortress.png";
 
-        let player = { x: 375, y: 400, width: 50, height: 50, speed: 8 };
-        let bullets = [];
-        let enemies = [];
-        let explosions = [];
-        let superfortresses = [];
-        let enemiesOnGround = 0;
-        let gameRunning = true;
-        let canUseSpecial = true;
-        let score = 0;
-        let cooldownTime = 0;
-        let lives = 5;
+    let player = { x: 375, y: 400, width: 50, height: 50, speed: 8 };
+    let bullets = [];
+    let enemies = [];
+    let explosions = [];
+    let superfortresses = [];
+    let enemiesOnGround = 0;
+    let gameRunning = true;
+    let canUseSpecial = true;
+    let score = 0;
+    let cooldownTime = 0;
+    let lives = 5;
+    let timeElapsed = 0;  // Temps écoulé pour ajuster la vitesse des ennemis
 
-        const gameOverScreen = document.getElementById("gameOver");
-        const replayButton = document.getElementById("replayButton");
+    const gameOverScreen = document.getElementById("gameOver");
+    const replayButton = document.getElementById("replayButton");
 
-        function resetGame() {
-            player.x = 375;
-            bullets = [];
-            enemies = [];
-            explosions = [];
-            superfortresses = [];
-            enemiesOnGround = 0;
-            gameRunning = true;
-            canUseSpecial = true;
-            score = 0;
-            cooldownTime = 0;
-            lives = 5;
-            gameOverScreen.style.display = "none";
-            gameLoop();
-        }
-
-        replayButton.addEventListener("click", resetGame);
-
-        const header = document.getElementById("mainHeader");
-        const toggleButton = document.getElementById("toggleBanner");
-        let bannerHidden = false;
-
-        toggleButton.addEventListener("click", () => {
-            if (!bannerHidden) {
-                header.style.transform = "translateY(-100%)";
-                toggleButton.innerText = "▼";
-                canvas.height = window.innerHeight;
-            } else {
-                header.style.transform = "translateY(0)";
-                toggleButton.innerText = "▲";
-                canvas.height = 600;
-            }
-            bannerHidden = !bannerHidden;
-        });
-
-        function drawPlayer() {
-            ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
-        }
-
-        function drawBullets() {
-            bullets.forEach((bullet, index) => {
-                bullet.y -= bullet.speed;
-                if (bullet.y < 0) bullets.splice(index, 1);
-                ctx.fillStyle = "red";
-                ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
-            });
-        }
-
-        function drawEnemies() {
-            enemies.forEach((enemy, index) => {
-                enemy.y += enemy.speed;
-                if (enemy.y > canvas.height) {
-                    enemies.splice(index, 1);
-                    enemiesOnGround++;
-                    lives--;
-                    if (lives <= 0) endGame();
-                }
-                ctx.drawImage(enemyImg, enemy.x, enemy.y, enemy.width, enemy.height);
-            });
-        }
-
-        function drawExplosions() {
-            explosions.forEach((explosion, index) => {
-                ctx.drawImage(explosionImg, explosion.x, explosion.y, 50, 50);
-                explosion.duration--;
-                if (explosion.duration <= 0) explosions.splice(index, 1);
-            });
-        }
-
-        function detectCollisions() {
-            bullets.forEach((bullet, bIndex) => {
-                enemies.forEach((enemy, eIndex) => {
-                    if (
-                        bullet.x < enemy.x + enemy.width &&
-                        bullet.x + bullet.width > enemy.x &&
-                        bullet.y < enemy.y + enemy.height &&
-                        bullet.y + bullet.height > enemy.y
-                    ) {
-                        bullets.splice(bIndex, 1);
-                        enemies.splice(eIndex, 1);
-                        explosions.push({ x: enemy.x, y: enemy.y, duration: 30 });
-                        score++;
-                    }
-                });
-            });
-        }
-
-        function useSpecial() {
-            if (canUseSpecial) {
-                
-                superfortresses = [
-                    { x: 0, y: canvas.height, width: canvas.width, height: 300, speed: 5 }  
-                ];
-
-                canUseSpecial = false;
-                cooldownTime = 30;
-
-                
-                const cooldownInterval = setInterval(() => {
-                    cooldownTime--;
-                    if (cooldownTime <= 0) {
-                        canUseSpecial = true;
-                        clearInterval(cooldownInterval);
-                    }
-                }, 1000);
-
-                
-                const interval = setInterval(() => {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    movePlayer();
-                    drawPlayer();
-                    drawBullets();
-                    drawEnemies();
-                    drawExplosions();
-                    drawHUD();
-
-                    superfortresses.forEach((fortress, index) => {
-                        fortress.y -= fortress.speed;
-                        ctx.drawImage(superfortressImg, fortress.x, fortress.y, fortress.width, fortress.height);
-
-                        enemies = enemies.filter((enemy) => {
-                            if (
-                                fortress.x < enemy.x + enemy.width &&
-                                fortress.x + fortress.width > enemy.x &&
-                                fortress.y < enemy.y + enemy.height &&
-                                fortress.y + fortress.height > enemy.y
-                            ) {
-                                explosions.push({ x: enemy.x, y: enemy.y, duration: 30 });
-                                return false;
-                            }
-                            return true;
-                        });
-                    });
-
-                 
-                    if (superfortresses[0].y + superfortresses[0].height < 0) {
-                        clearInterval(interval);
-                    }
-                }, 50);
-            }
-        }
-
-        function drawSuperfortresses() {
-            superfortresses.forEach(fortress => {
-                ctx.drawImage(superfortressImg, fortress.x, fortress.y, fortress.width, fortress.height);
-            });
-        }
-
-        function drawHUD() {
-            ctx.fillStyle = "white";
-            ctx.font = "20px Arial";
-            ctx.fillText(`Score: ${score}`, 10, 30);
-            ctx.fillText(`☢️ Spécial☢️: ${cooldownTime > 0 ? cooldownTime + "s" : "Prêt"}`, 10, 60);
-            ctx.fillText(`❤ ${lives}`, canvas.width - 80, 30);
-        }
-
-        function endGame() {
-            gameRunning = false;
-            gameOverScreen.style.display = "block";
-        }
-
-        const keys = {};
-        document.addEventListener("keydown", (e) => {
-            keys[e.key] = true;
-            if (e.key === "a") useSpecial();
-        });
-        document.addEventListener("keyup", (e) => keys[e.key] = false);
-
-        function movePlayer() {
-            if (keys["ArrowLeft"] && player.x > 0) player.x -= player.speed;
-            if (keys["ArrowRight"] && player.x < canvas.width - player.width) player.x += player.speed;
-            if (keys[" "] && gameRunning) {
-                bullets.push({ x: player.x + player.width / 2 - 2.5, y: player.y, width: 5, height: 10, speed: 5 });
-            }
-        }
-
-        function spawnEnemy() {
-            enemies.push({ x: Math.random() * (canvas.width - 50), y: -50, width: 50, height: 50, speed: 2 });
-        }
-
-        function gameLoop() {
-            if (!gameRunning) return;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            movePlayer();
-            drawPlayer();
-            drawBullets();
-            drawEnemies();
-            drawExplosions();
-            drawSuperfortresses();  
-            drawHUD();
-            detectCollisions();
-            requestAnimationFrame(gameLoop);
-        }
-
-        setInterval(spawnEnemy, 2000);
+    function resetGame() {
+        player.x = 375;
+        bullets = [];
+        enemies = [];
+        explosions = [];
+        superfortresses = [];
+        enemiesOnGround = 0;
+        gameRunning = true;
+        canUseSpecial = true;
+        score = 0;
+        cooldownTime = 0;
+        lives = 5;
+        timeElapsed = 0;  // Réinitialiser le temps écoulé
+        gameOverScreen.style.display = "none";
         gameLoop();
-    </script>
+    }
+
+    replayButton.addEventListener("click", resetGame);
+
+    const header = document.getElementById("mainHeader");
+    const toggleButton = document.getElementById("toggleBanner");
+    let bannerHidden = false;
+
+    toggleButton.addEventListener("click", () => {
+        if (!bannerHidden) {
+            // Passer en mode plein écran
+            document.documentElement.requestFullscreen();
+            toggleButton.innerText = "▼";
+            canvas.height = window.innerHeight;
+        } else {
+            // Sortir du mode plein écran
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+            toggleButton.innerText = "▲";
+            canvas.height = 600;
+        }
+        bannerHidden = !bannerHidden;
+    });
+
+    function drawPlayer() {
+        ctx.drawImage(playerImg, player.x, player.y, player.width, player.height);
+    }
+
+    function drawBullets() {
+        bullets.forEach((bullet, index) => {
+            bullet.y -= bullet.speed;
+            if (bullet.y < 0) bullets.splice(index, 1);
+            ctx.fillStyle = "red";
+            ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+        });
+    }
+
+    function drawEnemies() {
+        enemies.forEach((enemy, index) => {
+            enemy.y += enemy.speed;
+            if (enemy.y > canvas.height) {
+                enemies.splice(index, 1);
+                enemiesOnGround++;
+                lives--;
+                if (lives <= 0) endGame();
+            }
+            ctx.drawImage(enemyImg, enemy.x, enemy.y, enemy.width, enemy.height);
+        });
+    }
+
+    function drawExplosions() {
+        explosions.forEach((explosion, index) => {
+            ctx.drawImage(explosionImg, explosion.x, explosion.y, 50, 50);
+            explosion.duration--;
+            if (explosion.duration <= 0) explosions.splice(index, 1);
+        });
+    }
+
+    function detectCollisions() {
+        bullets.forEach((bullet, bIndex) => {
+            enemies.forEach((enemy, eIndex) => {
+                if (
+                    bullet.x < enemy.x + enemy.width &&
+                    bullet.x + bullet.width > enemy.x &&
+                    bullet.y < enemy.y + enemy.height &&
+                    bullet.y + bullet.height > enemy.y
+                ) {
+                    bullets.splice(bIndex, 1);
+                    enemies.splice(eIndex, 1);
+                    explosions.push({ x: enemy.x, y: enemy.y, duration: 30 });
+                    score++;
+                }
+            });
+        });
+    }
+
+    function useSpecial() {
+        if (canUseSpecial && score >= 15) {  // Vérifier si le score est suffisant pour utiliser la capacité spéciale
+            superfortresses = [
+                { x: 0, y: canvas.height, width: canvas.width, height: 300, speed: 5 }
+            ];
+
+            canUseSpecial = false;
+            cooldownTime = 30;
+
+            // Réduire le score de 15 points à chaque activation de la capacité spéciale
+            score -= 15;
+
+            const cooldownInterval = setInterval(() => {
+                cooldownTime--;
+                if (cooldownTime <= 0) {
+                    canUseSpecial = true;
+                    clearInterval(cooldownInterval);
+                }
+            }, 1000);
+
+            const interval = setInterval(() => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                movePlayer();
+                drawPlayer();
+                drawBullets();
+                drawEnemies();
+                drawExplosions();
+                drawHUD();
+
+                superfortresses.forEach((fortress, index) => {
+                    fortress.y -= fortress.speed;
+                    ctx.drawImage(superfortressImg, fortress.x, fortress.y, fortress.width, fortress.height);
+
+                    enemies = enemies.filter((enemy) => {
+                        if (
+                            fortress.x < enemy.x + enemy.width &&
+                            fortress.x + fortress.width > enemy.x &&
+                            fortress.y < enemy.y + enemy.height &&
+                            fortress.y + fortress.height > enemy.y
+                        ) {
+                            explosions.push({ x: enemy.x, y: enemy.y, duration: 30 });
+                            score++;  // Ajouter 1 point pour chaque ennemi tué par la capacité spéciale
+                            return false;
+                        }
+                        return true;
+                    });
+                });
+
+                if (superfortresses[0].y + superfortresses[0].height < 0) {
+                    clearInterval(interval);
+                }
+            }, 50);
+        }
+    }
+
+    function drawSuperfortresses() {
+        superfortresses.forEach(fortress => {
+            ctx.drawImage(superfortressImg, fortress.x, fortress.y, fortress.width, fortress.height);
+        });
+    }
+
+    function drawHUD() {
+        ctx.fillStyle = "white";
+        ctx.font = "20px Arial";
+        ctx.fillText(`Score: ${score}`, 10, 30);
+        ctx.fillText(`☢️ Spécial☢️: ${cooldownTime > 0 ? cooldownTime + "s" : "Prêt"}`, 10, 60);
+        ctx.fillText(`❤ ${lives}`, canvas.width - 80, 30);
+    }
+
+    function endGame() {
+        gameRunning = false;
+        gameOverScreen.style.display = "block";
+    }
+
+    const keys = {};
+    document.addEventListener("keydown", (e) => {
+        keys[e.key] = true;
+        if (e.key === "a") useSpecial();
+    });
+    document.addEventListener("keyup", (e) => keys[e.key] = false);
+
+    function movePlayer() {
+        if (keys["ArrowLeft"] && player.x > 0) player.x -= player.speed;
+        if (keys["ArrowRight"] && player.x < canvas.width - player.width) player.x += player.speed;
+        if (keys[" "] && gameRunning) {
+            bullets.push({ x: player.x + player.width / 2 - 2.5, y: player.y, width: 5, height: 10, speed: 5 });
+        }
+    }
+
+    function spawnEnemy() {
+        // Augmenter la vitesse des ennemis au fil du temps
+        let enemySpeed = 2 + Math.floor(timeElapsed / 10); // Augmente la vitesse tous les 10 secondes
+        enemies.push({ x: Math.random() * (canvas.width - 50), y: -50, width: 50, height: 50, speed: enemySpeed });
+    }
+
+    function gameLoop() {
+        if (!gameRunning) return;
+        timeElapsed++; // Augmenter le temps écoulé
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        movePlayer();
+        drawPlayer();
+        drawBullets();
+        drawEnemies();
+        drawExplosions();
+        drawSuperfortresses();
+        drawHUD();
+        detectCollisions();
+        requestAnimationFrame(gameLoop);
+    }
+
+    setInterval(spawnEnemy, 2000);
+    gameLoop();
+</script>
+
 </body>
 </html>
