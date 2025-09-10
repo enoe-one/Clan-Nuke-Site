@@ -323,6 +323,12 @@
 
         setInterval(spawnEnemy, 2000);
         gameLoop();
+        document.addEventListener("keydown", (e) => {
+    console.log("Touche pressée :", e.key); // debug
+    keys[e.key] = true;
+    if (e.key.toLowerCase() === "s") useSpecial();
+});
+
     </script>
 </body>
 </html>
